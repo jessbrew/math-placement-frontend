@@ -14,10 +14,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
+@use '../style/base';
 button a {
-	color: #006643;
-	background-color: rgb(188,190,192);
+	color: base.$alternate-foreground-color;
+	background-color: base.$alternate-background-color;
 	margin: 1rem;
 	padding: 0.4rem;
 	border-radius: 1rem;
@@ -26,7 +27,7 @@ button a {
     transition: background-color 0.2s, color 0.2s;
 }
 button a:hover {
-    background-color: #006643;
-	color: rgb(188,190,192);
+    background-color: base.$alternate-foreground-color;
+	color: base.$alternate-background-color;
 }
 </style>
