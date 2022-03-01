@@ -23,15 +23,16 @@
   }
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
+@use '../style/base';
 .instructions {
-    color: rgb(30,30,30);
+    color: base.$foreground-color;
 }
 .important {
-    color: rgb(119,36,50);
+    color: base.$emphasis-color;
     font-weight: bold;
 }
 .instructions a {
-    color: rgb(0,139,149);
+    color: base.$link-color;
 }
 </style>

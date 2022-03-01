@@ -12,7 +12,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
+@use '../style/base';
 a {
   color: white;
   text-decoration: none;
