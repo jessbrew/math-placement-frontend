@@ -1,7 +1,7 @@
 <template>
-  <span>
-    <v-app-bar color="purple" dense app dark>
-      
+  <span id=header>
+    <v-app-bar color=rgb(188,190,192) prominent app dark max-height=90>
+      <img alt='Mathematics Placement Exam' src="@/assets/MathematicsPlacementExam.png">
     </v-app-bar>
   </span>
 </template>
@@ -16,5 +16,9 @@ export default {
 a {
   color: white;
   text-decoration: none;
+}
+#header img {
+	object-fit: contain;
+    height: 65%;
 }
 </style>
