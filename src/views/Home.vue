@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 .home {
     margin-left: 10vw;
     margin-right: 10vw;
