@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import Data from './questions.json'; // eslint-disable-line
+import Data from '@/test-data/questions.json'; // eslint-disable-line
 export default {
     name: "Test",
     data: function() {
