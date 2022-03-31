@@ -65,10 +65,7 @@ export default {
         }
     },
     methods: {
-        updateQuestion() {
-			// Update the question
-            this.questionText = this.Data[this.currentQuestion]["question_text"];
-            document.getElementById("questionText").innerHTML = this.questionText;
+		formatQuestion() {
 			// Format the question svg, if there is one
 			if (typeof document.getElementById("questionText").getElementsByTagName("svg")[0] !== "undefined") {
 				document.getElementById("questionText").getElementsByTagName("svg")[0].style.display = "Block";
@@ -77,6 +74,19 @@ export default {
 				document.getElementById("questionText").getElementsByTagName("svg")[0].style.width = "100%";
 				document.getElementById("questionText").getElementsByTagName("svg")[0].style.height = "20vh";
 			}
+			// Make emphasized text red
+			if (typeof document.getElementById("questionText").getElementsByTagName("strong")[0] !== "undefined") {
+				for (let i = 0; i < document.getElementById("questionText").getElementsByTagName("strong").length; i++) {
+					document.getElementById("questionText").getElementsByTagName("strong")[i].style.color = "rgb(119,36,50)";
+				}
+			}
+			// Called after the formatting of question svg, because this outputs more svgs
+            MathJax.typeset(); // eslint-disable-line
+		},
+        getQuestion() {
+			// Update the question
+            this.questionText = this.Data[this.currentQuestion]["question_text"];
+            document.getElementById("questionText").innerHTML = this.questionText;
 			// Update the answers
             this.answersNumber = this.Data[this.currentQuestion]["answers"].length;
             document.getElementById("a").innerHTML = this.Data[this.currentQuestion].answers[0].answer_text
@@ -88,8 +98,6 @@ export default {
             if (this.answersNumber > 3) {
                 document.getElementById("d").innerHTML = this.Data[this.currentQuestion].answers[3].answer_text
             }
-			// Called after the formatting of question svg, because this outputs more svgs
-            MathJax.typeset() // eslint-disable-line
         },
         submitForm() {
             if (this.$refs.question.validate()){
@@ -101,7 +109,8 @@ export default {
                 }
                 else {
                     // get the next question
-                    this.updateQuestion(); // get the next question/answer set
+                    this.getQuestion(); // get the next question/answer set
+					this.formatQuestion();
 					this.$refs.question.reset(); // clear selection
                 }
             }
@@ -109,8 +118,8 @@ export default {
     },
     mounted() {
         // run when page loaded
-        this.updateQuestion();
-        MathJax.typeset(); // eslint-disable-line
+        this.getQuestion();
+		this.formatQuestion();
     },
     updated() {
         // run when page updated
