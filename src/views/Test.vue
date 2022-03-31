@@ -58,7 +58,6 @@ export default {
             answersNumber: 4, // set this to number of possible answers for question
             currentQuestion: 0, // zero-based counter for questions
             questionText: "", // overwritten by dynamic content
-            answersText:[],
 			testRules: [
 				v => !!v || "Please select an option.",
 				v => v !== "" || "Please select an option",
@@ -80,18 +79,14 @@ export default {
 			}
 			// Update the answers
             this.answersNumber = this.Data[this.currentQuestion]["answers"].length;
-            this.answersText = [];
-            for (let x = 0; x < this.answersNumber; x++) {
-                this.answersText.push(this.Data[this.currentQuestion]["answers"][x]["answer_text"]);
-            }
-            document.getElementById("a").innerHTML = this.answersText[0];
-            document.getElementById("b").innerHTML = this.answersText[1];
+            document.getElementById("a").innerHTML = this.Data[this.currentQuestion].answers[0].answer_text
+            document.getElementById("b").innerHTML = this.Data[this.currentQuestion].answers[1].answer_text
 			// Check if there are 2, 3, or 4 possible answers
-            if (typeof this.answersText[2] !== "undefined") {
-                document.getElementById("c").innerHTML = this.answersText[2];
+            if (this.answersNumber > 2) {
+                document.getElementById("c").innerHTML = this.Data[this.currentQuestion].answers[2].answer_text
             }
-            if (typeof this.answersText[3] !== "undefined") {
-                document.getElementById("d").innerHTML = this.answersText[3];
+            if (this.answersNumber > 3) {
+                document.getElementById("d").innerHTML = this.Data[this.currentQuestion].answers[3].answer_text
             }
 			// Called after the formatting of question svg, because this outputs more svgs
             MathJax.typeset() // eslint-disable-line
