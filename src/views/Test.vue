@@ -25,14 +25,14 @@
       </v-radio>
       <v-radio
         value="C"
-        v-show="answersNumber >= 3">
+        v-show="this.Data[this.currentQuestion].answers.length >= 3">
         <template v-slot:label>
           <div id="c" class="text--primary"></div>
         </template>
       </v-radio>
       <v-radio
         value="D"
-        v-show="answersNumber >= 4">
+        v-show="this.Data[this.currentQuestion].answers.length >= 4">
         <template v-slot:label>
           <div id="d" class="text--primary"></div>
         </template>
@@ -55,9 +55,7 @@ export default {
             valid: true,
             Data,
             answer:"",
-            answersNumber: 4, // set this to number of possible answers for question
             currentQuestion: 0, // zero-based counter for questions
-            questionText: "", // overwritten by dynamic content
 			testRules: [
 				v => !!v || "Please select an option.",
 				v => v !== "" || "Please select an option",
@@ -85,17 +83,15 @@ export default {
 		},
         getQuestion() {
 			// Update the question
-            this.questionText = this.Data[this.currentQuestion]["question_text"];
-            document.getElementById("questionText").innerHTML = this.questionText;
+            document.getElementById("questionText").innerHTML = this.Data[this.currentQuestion]["question_text"];
 			// Update the answers
-            this.answersNumber = this.Data[this.currentQuestion]["answers"].length;
             document.getElementById("a").innerHTML = this.Data[this.currentQuestion].answers[0].answer_text
             document.getElementById("b").innerHTML = this.Data[this.currentQuestion].answers[1].answer_text
 			// Check if there are 2, 3, or 4 possible answers
-            if (this.answersNumber > 2) {
+            if (this.Data[this.currentQuestion].answers.length > 2) {
                 document.getElementById("c").innerHTML = this.Data[this.currentQuestion].answers[2].answer_text
             }
-            if (this.answersNumber > 3) {
+            if (this.Data[this.currentQuestion].answers.length > 3) {
                 document.getElementById("d").innerHTML = this.Data[this.currentQuestion].answers[3].answer_text
             }
         },
