@@ -10,31 +10,31 @@
     <v-card>
       <div id="questionText"></div>
     </v-card>
-    <v-radio-group v-model="answer" id="answers" column dense :rules="testRules">
+    <v-radio-group v-model="answer" id="answers" column dense :rules="testRules" class="text--primary">
       <v-radio
         value="A">
         <template v-slot:label>
-          <div id="a"></div>
+          <div id="a" class="text--primary"></div>
         </template>
       </v-radio>
       <v-radio
         value="B">
         <template v-slot:label>
-          <div id="b"></div>
+          <div id="b" class="text--primary"></div>
         </template>
       </v-radio>
       <v-radio
         value="C"
         v-show="answersNumber >= 3">
         <template v-slot:label>
-          <div id="c"></div>
+          <div id="c" class="text--primary"></div>
         </template>
       </v-radio>
       <v-radio
         value="D"
         v-show="answersNumber >= 4">
         <template v-slot:label>
-          <div id="d"></div>
+          <div id="d" class="text--primary"></div>
         </template>
       </v-radio>
     </v-radio-group>
