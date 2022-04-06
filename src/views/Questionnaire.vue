@@ -37,7 +37,7 @@
           value="none"
           :rules="classRules"
           dense
-        ></v-checkbox>
+          ></v-checkbox>
       </v-col>
     </v-flex>
     <b>Have you taken a math course in the past 12 months?</b>
@@ -106,16 +106,13 @@
         value="F"
         ></v-radio>
     </v-radio-group>
-    <v-btn
-      type="submit"
-      >
-      submit
-    </v-btn>
-</v-form>
+    <math-button msg="submit"></math-button>
+  </v-form>
 </div>
 </template>
 
 <script>
+import MathButton from '@/components/Button.vue';
 export default {
     name: "Questionnaire",
     data: function() {
@@ -129,12 +126,14 @@ export default {
             ],
         }
     },
+    components: {
+        MathButton
+    },
     methods: {
         submitForm() {
-            console.log(this);
             if (this.$refs.questionnaire.validate()){
                 alert('submitted');
-                this.$router.push("/test");
+                this.$router.replace("/Test");
             }
         }
     }

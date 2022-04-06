@@ -38,16 +38,14 @@
         </template>
       </v-radio>
     </v-radio-group>
-    <v-btn
-      type="submit">
-      submit
-    </v-btn>
+    <math-button msg="submit"></math-button>
   </v-form>
 </div>
 </template>
 
 <script>
 import Data from '@/test-data/questions.json'; // eslint-disable-line
+import MathButton from '@/components/Button.vue';
 export default {
     name: "Test",
     data: function() {
@@ -61,6 +59,9 @@ export default {
 				v => v !== "" || "Please select an option",
 			],
         }
+    },
+    components: {
+        MathButton
     },
     methods: {
 		formatQuestion() {
@@ -106,7 +107,7 @@ export default {
                 else {
                     // get the next question
                     this.getQuestion(); // get the next question/answer set
-					this.formatQuestion();
+					this.formatQuestion(); // format the outputed questions
 					this.$refs.question.reset(); // clear selection
                 }
             }
