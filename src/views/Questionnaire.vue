@@ -132,7 +132,9 @@ export default {
     methods: {
         submitForm() {
             if (this.$refs.questionnaire.validate()){
+                // replace with submitting data to server
                 alert('submitted');
+                console.log(this.classTaken,this.recent,this.lowestGrade);
                 this.$router.replace("/Test");
             }
         }

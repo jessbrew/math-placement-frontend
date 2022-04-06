@@ -88,7 +88,7 @@ export default {
 			// Update the answers
             document.getElementById("a").innerHTML = this.Data[this.currentQuestion].answers[0].answer_text
             document.getElementById("b").innerHTML = this.Data[this.currentQuestion].answers[1].answer_text
-			// Check if there are 2, 3, or 4 possible answers
+			// Check if there are only 2 possible answers
             if (this.Data[this.currentQuestion].answers.length > 2) {
                 document.getElementById("c").innerHTML = this.Data[this.currentQuestion].answers[2].answer_text
             }
@@ -118,9 +118,6 @@ export default {
         this.getQuestion();
 		this.formatQuestion();
     },
-    updated() {
-        // run when page updated
-    }
 }
 </script>
 

@@ -43,7 +43,9 @@ export default {
             name: '',
             nameRules: [
                 v => !!v || 'Name is required',
+                // Name cannot be whitespace
                 v => !/^\s*$/g.test(v) || 'Name is required',
+                // No numbers in name
                 v => /^\D*$/g.test(v) || 'Name is required',
             ],
             id: '',
@@ -62,7 +64,9 @@ export default {
         },
         submitForm() {
             if (this.$refs.login.validate()){
+                // Replace with submission to server
                 alert('submitted');
+                console.log(this.fname,this.lname,this.id);
                 this.$router.replace("/Questionnaire");
             }
         }
