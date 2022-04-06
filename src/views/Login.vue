@@ -43,6 +43,8 @@ export default {
             name: '',
             nameRules: [
                 v => !!v || 'Name is required',
+                v => !/^\s*$/g.test(v) || 'Name is required',
+                v => /^\D*$/g.test(v) || 'Name is required',
             ],
             id: '',
             idrules: [
