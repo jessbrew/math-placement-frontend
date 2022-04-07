@@ -101,8 +101,7 @@ export default {
                 console.log(this.answer); // logs the selected answer; replace with submission to server
                   this.currentQuestion++;
                 if (this.currentQuestion == this.Data.length) {
-					// The test is done. Replace this with a redirect to the next page.
-                    alert("Test completed!")
+                    this.$router.replace("/Completed");
                 }
                 else {
                     // get the next question
@@ -125,12 +124,13 @@ export default {
 @use '../style/base';
 /* Putting styling for dynamically-loaded SVGs here does nothing */
 #test {
-    width: 70vw;
+    width: 35vw;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 	/* Mathjax respects this in SVG output */
 	font-size: 1.5rem;
+    margin-top: 1rem;
 }
 /* The possible answers */
 #a, #b, #c, #d {
