@@ -1,33 +1,18 @@
 <template>
   <div class="home">
-    <instructions/>
-	<div id='Button'>
-      <math-button route='/Login' msg="Begin Test"/>
-	</div>
+    <img alt="Vue logo" src="../assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Instructions from '@/components/Instructions.vue'
-import MathButton from '@/components/Button.vue'
+import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
   components: {
-      Instructions,
-      MathButton
+    HelloWorld
   }
 }
 </script>
-
-<style lang='scss' scoped>
-.home {
-    margin-left: 10vw;
-    margin-right: 10vw;
-}
-#Button {
-	text-align: center;
-	margin-top: 1rem;
-}
-</style>
