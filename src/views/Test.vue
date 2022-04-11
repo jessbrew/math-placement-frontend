@@ -1,6 +1,6 @@
 <template>
 <div id="test">
-  <p><strong>Time Remaining</strong>: {{remainingTime}}</p>
+  <p><strong>Time Remaining</strong>: {{remainingTime}} Minutes</p>
   <v-form
     ref="question"
     v-model="valid"
@@ -53,6 +53,7 @@ export default {
         return {
             valid: true,
             Data,
+            endTime: new Date(),
             answer:"",
             currentQuestion: 0, // zero-based counter for questions
 			testRules: [
@@ -66,6 +67,14 @@ export default {
         MathButton
     },
     methods: {
+        updateTime() {
+            // Maybe redirect here if time exceeded? Right now that is in form submission. Then this could be called every minute.
+            let currentTime = new Date();
+            if (currentTime >= this.endTime) {
+                this.$router.replace("/completed");
+            }
+            this.remainingTime = Math.floor((this.endTime - currentTime) / 60000);
+        },
 		formatQuestion() {
 			// Format the question svg, if there is one
 			if (typeof document.getElementById("questionText").getElementsByTagName("svg")[0] !== "undefined") {
@@ -101,7 +110,8 @@ export default {
         submitForm() {
             if (this.$refs.question.validate()){
                 console.log(this.answer); // logs the selected answer; replace with submission to server
-                  this.currentQuestion++;
+                this.updateTime(); // Force update of time
+                this.currentQuestion++;
                 if (this.currentQuestion == this.Data.questions.length) {
                     this.$router.replace("/Completed");
                 }
@@ -118,7 +128,10 @@ export default {
         // run when page loaded
         this.getQuestion();
 		this.formatQuestion();
-        this.remainingTime = this.Data.time_remaining
+        let startTime = new Date();
+        this.endTime = new Date(startTime.valueOf() + this.Data.time_remaining*60000);
+        this.updateTime();
+        window.setInterval(() => {this.updateTime();},60000); // Run updateTime() every minute
     },
 }
 </script>
