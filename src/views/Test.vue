@@ -1,5 +1,6 @@
 <template>
 <div id="test">
+  <p><strong>Time Remaining</strong>: {{remainingTime}}</p>
   <v-form
     ref="question"
     v-model="valid"
@@ -25,14 +26,14 @@
       </v-radio>
       <v-radio
         value="C"
-        v-show="this.Data[this.currentQuestion].answers.length >= 3">
+        v-show="this.Data.questions[this.currentQuestion].answers.length >= 3">
         <template v-slot:label>
           <div id="c" class="text--primary"></div>
         </template>
       </v-radio>
       <v-radio
         value="D"
-        v-show="this.Data[this.currentQuestion].answers.length >= 4">
+        v-show="this.Data.questions[this.currentQuestion].answers.length >= 4">
         <template v-slot:label>
           <div id="d" class="text--primary"></div>
         </template>
@@ -58,6 +59,7 @@ export default {
 				v => !!v || "Please select an option.",
 				v => v !== "" || "Please select an option",
 			],
+            remainingTime: 20,
         }
     },
     components: {
@@ -84,23 +86,23 @@ export default {
 		},
         getQuestion() {
 			// Update the question
-            document.getElementById("questionText").innerHTML = this.Data[this.currentQuestion]["question_text"];
+            document.getElementById("questionText").innerHTML = this.Data.questions[this.currentQuestion]["question_text"];
 			// Update the answers
-            document.getElementById("a").innerHTML = this.Data[this.currentQuestion].answers[0].answer_text
-            document.getElementById("b").innerHTML = this.Data[this.currentQuestion].answers[1].answer_text
+            document.getElementById("a").innerHTML = this.Data.questions[this.currentQuestion].answers[0].answer_text
+            document.getElementById("b").innerHTML = this.Data.questions[this.currentQuestion].answers[1].answer_text
 			// Check if there are only 2 possible answers
-            if (this.Data[this.currentQuestion].answers.length > 2) {
-                document.getElementById("c").innerHTML = this.Data[this.currentQuestion].answers[2].answer_text
+            if (this.Data.questions[this.currentQuestion].answers.length > 2) {
+                document.getElementById("c").innerHTML = this.Data.questions[this.currentQuestion].answers[2].answer_text
             }
-            if (this.Data[this.currentQuestion].answers.length > 3) {
-                document.getElementById("d").innerHTML = this.Data[this.currentQuestion].answers[3].answer_text
+            if (this.Data.questions[this.currentQuestion].answers.length > 3) {
+                document.getElementById("d").innerHTML = this.Data.questions[this.currentQuestion].answers[3].answer_text
             }
         },
         submitForm() {
             if (this.$refs.question.validate()){
                 console.log(this.answer); // logs the selected answer; replace with submission to server
                   this.currentQuestion++;
-                if (this.currentQuestion == this.Data.length) {
+                if (this.currentQuestion == this.Data.questions.length) {
                     this.$router.replace("/Completed");
                 }
                 else {
@@ -116,6 +118,7 @@ export default {
         // run when page loaded
         this.getQuestion();
 		this.formatQuestion();
+        this.remainingTime = this.Data.time_remaining
     },
 }
 </script>
@@ -135,5 +138,8 @@ export default {
 /* The possible answers */
 #a, #b, #c, #d {
 	font-size: 1.5rem;
+}
+strong {
+    color: base.$emphasis-color;
 }
 </style>
