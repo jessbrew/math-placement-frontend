@@ -61,6 +61,7 @@ export default {
 				v => v !== "" || "Please select an option",
 			],
             remainingTime: 20,
+            interval: ""
         }
     },
     components: {
@@ -71,7 +72,8 @@ export default {
             // Maybe redirect here if time exceeded? Right now that is in form submission. Then this could be called every minute.
             let currentTime = new Date();
             if (currentTime >= this.endTime) {
-                this.$router.replace("/completed");
+                clearInterval(this.interval);
+                this.$router.replace("/Completed");
             }
             this.remainingTime = Math.floor((this.endTime - currentTime) / 60000);
         },
@@ -113,6 +115,7 @@ export default {
                 this.updateTime(); // Force update of time
                 this.currentQuestion++;
                 if (this.currentQuestion == this.Data.questions.length) {
+                    clearInterval(this.interval);
                     this.$router.replace("/Completed");
                 }
                 else {
@@ -131,7 +134,7 @@ export default {
         let startTime = new Date();
         this.endTime = new Date(startTime.valueOf() + this.Data.time_remaining*60000);
         this.updateTime();
-        window.setInterval(() => {this.updateTime();},60000); // Run updateTime() every minute
+        this.interval = window.setInterval(() => {this.updateTime();},60000); // Run updateTime() every minute
     },
 }
 </script>
