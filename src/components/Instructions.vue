@@ -12,7 +12,7 @@
       <li>You can only log in once. If you lose your connection, you will need to call the WLC Technology Help Desk to reset your record.</li>
       <li>If you have any computer problems or questions, please call the WLC Technology Help Desk at <a href="tel:+14144438911">(414) 443-8911</a> for assistance.</li>
       <li>When you are ready, click "Begin Test" to go to the log-in screen.</li>
-      <li>You will need your WLC ID number to login. Contact the registrar's office (email: <a href="mailto:registrarsoffice@wlc.edu">registrarsoffice@wlc.edu</a> or phone: <a href="tel:+14144438785"> (414) 443-8785</a>) if you need your number.</li>
+      <li>You will need your WLC ID number to login. Contact the registrar's office (email: <a href="mailto:registrarsoffice@wlc.edu">registrarsoffice@wlc.edu</a> or phone: <a href="tel:+14144438785">(414) 443-8785</a>) if you need your number.</li>
     </ul>
   </div>
 </template>
