@@ -7,6 +7,7 @@
       >
       <math-button msg="Begin Test"/>
     </v-form>
+    <app-footer></app-footer>
   </div>
 </template>
 
@@ -14,12 +15,13 @@
 // @ is an alias to /src
 import Instructions from '@/components/Instructions.vue';
 import MathButton from '@/components/Button.vue';
-
+import AppFooter from "@/components/AppFooter.vue";
 export default {
     name: 'Home',
     components: {
         Instructions,
-        MathButton
+        MathButton,
+        AppFooter
     },
     methods: {
         submitForm() {
