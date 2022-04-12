@@ -48,6 +48,7 @@ export default {
         submitForm() {
             if (this.$refs.login.validate()) {
                 console.log([this.username,this.password]); // Replace with submission to server
+                this.$router.replace("/Admin");
             }
             else {
                 alert("Please enter a valid username/password");
