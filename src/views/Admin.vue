@@ -1,16 +1,31 @@
 <template>
 <div id='table'>
-  <v-data-table
-    :headers="headers"
-    :items="overviewData"
-    class="elevation-1">
-    <template v-slot:item.score="{item}">
-      {{item.score}}%
-    </template>
-    <template v-slot:item.date="{item}">
-      {{formatDate(item.date)}}
-    </template>
+  <v-card dark>
+    <v-card-title>
+      <v-text-field label="Search" hide-details single-line v-model="search"></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="overviewData"
+      :expanded.sync="expanded"
+      single-expand="true"
+      item-key="id"
+      show-expand
+      class="elevation-1"
+      :search="search">
+      <template v-slot:item.score="{item}">
+        {{item.score.toFixed(2)}}%
+      </template>
+      <template v-slot:item.date="{item}">
+        {{formatDate(item.date)}}
+      </template>
+      <template v-slot:expanded-item="{headers, item}">
+        <td :colspan="headers.length">
+          More info about {{item.lname}}, {{item.fname}}
+        </td>
+      </template>
   </v-data-table>
+  </v-card>
 </div>
 </template>
 
@@ -26,8 +41,11 @@ export default {
                 {text: "First Name",value: "fname"},
                 {text: "Date",value: "date"},
                 {text: "Score",value: "score"},
-                {text: "Placement",value: "placement"}
+                {text: "Placement",value: "placement"},
+                {text: '', value: 'data-table-expand'}
             ],
+            search: "",
+            expanded: []
         }
     },
     methods: {
