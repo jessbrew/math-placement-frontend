@@ -42,6 +42,11 @@ const routes = [
         path: '/login_admin',
         name: 'Administrator Login',
         component: () => import('@/views/Login_Admin.vue')
+    },
+    {
+        path: '/admin',
+        name: 'Administrator Overview',
+        component: () => import('@/views/Admin.vue')
     }
 ]
 
