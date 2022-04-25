@@ -1,6 +1,6 @@
 <template>
 <div id='table'>
-  <student-popup :id="popupID" :show="popupDisplay"></student-popup>
+  <component :is="popupComponent" v-bind="popupProperties"></component>
   <h1 class="text-center text-h2">Student Results</h1>
   <v-card>
     <v-card-title>
@@ -39,9 +39,9 @@ export default {
                 {text: "Score",value: "score"},
                 {text: "Placement",value: "placement"}
             ],
-            popupDisplay: false,
-            popupID: null,
             search: "",
+            popupComponent: null,
+            popupProperties: {'id':null}
         }
     },
     components: {
@@ -56,8 +56,8 @@ export default {
         },
         showPopup(studentID) {
             let id = studentID.id;
-            this.popupID = id;
-            this.popupDisplay = true;
+            this.popupProperties.id = id;
+            this.popupComponent = "StudentPopup";
         },
         hidePopup() {
             this.popupComponent = null;

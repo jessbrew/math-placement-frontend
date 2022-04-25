@@ -1,13 +1,9 @@
 <!--
-    TODO: Fix error when closing window
     TODO: Grouping for categories
     TODO: Table scrolling
-    TODO: Fix bug for re-opening popup
-    TODO: Stop getting information on dropdown
-    TODO: Re-write to not use display variable
 -->
 <template>
-<v-overlay :value="show" opacity="0.9">
+<v-overlay opacity="0.9">
   <div id="header">
     <v-app-bar light><strong>{{studentData.lname}}, {{studentData.fname}}</strong>
       <v-spacer/>
@@ -62,7 +58,7 @@
       </v-card>
     </div>
     
-    <div id="input"> <!-- Placement and close window -->
+    <div id="input"> <!-- Placement -->
       <v-card light>
         <v-card-title>
           <strong>Placement</strong>
@@ -104,8 +100,7 @@ import studentData from '@/test-data/student_info.json'
 export default {
     name: 'StudentPopup',
     props: {
-        id: Number,
-        show: Boolean
+        id: Number
     },
     data: function() {
         return {
@@ -144,16 +139,12 @@ export default {
             }
         },
         closePopup() {
-            this.show = false;
+            this.$parent.popupComponent = null;
         }
     },
     beforeUpdate() {
         if (document.getElementsByClassName("v-overlay--active")[0]) {
             document.getElementsByClassName("v-overlay--active")[0].style.position = "sticky";
-        }
-        if (this.show) {
-            this.getStudentOverview(this.id);
-            this.placement = studentData.placement;
         }
     },
     mounted() {
@@ -161,6 +152,8 @@ export default {
         if (document.getElementsByClassName("v-overlay__scrim")[0]) {
             document.getElementsByClassName("v-overlay__scrim")[0].style.position = "fixed";
         }
+        this.getStudentOverview(this.id);
+        this.placement = studentData.placement;
     }
 }
 </script>
