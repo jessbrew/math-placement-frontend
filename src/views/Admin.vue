@@ -1,28 +1,23 @@
 <template>
 <div id='table'>
-  <v-card dark>
+  <student-popup :id="popupID" :show="popupDisplay"></student-popup>
+  <h1 class="text-center text-h2">Student Results</h1>
+  <v-card>
     <v-card-title>
       <v-text-field label="Search" hide-details single-line v-model="search"></v-text-field>
     </v-card-title>
     <v-data-table
       :headers="headers"
       :items="overviewData"
-      :expanded.sync="expanded"
-      single-expand="true"
       item-key="id"
-      show-expand
       class="elevation-1"
-      :search="search">
+      :search="search"
+      @click:row="showPopup">
       <template v-slot:item.score="{item}">
         {{item.score.toFixed(2)}}%
       </template>
       <template v-slot:item.date="{item}">
         {{formatDate(item.date)}}
-      </template>
-      <template v-slot:expanded-item="{headers, item}">
-        <td :colspan="headers.length">
-          More info about {{item.lname}}, {{item.fname}}
-        </td>
       </template>
   </v-data-table>
   </v-card>
@@ -31,6 +26,7 @@
 
 <script>
 import overviewData from '@/test-data/student_overview_data.json'
+import StudentPopup from '@/components/StudentPopup.vue'
 export default {
     name: "AdminOverview",
     data: function() {
@@ -41,12 +37,15 @@ export default {
                 {text: "First Name",value: "fname"},
                 {text: "Date",value: "date"},
                 {text: "Score",value: "score"},
-                {text: "Placement",value: "placement"},
-                {text: '', value: 'data-table-expand'}
+                {text: "Placement",value: "placement"}
             ],
+            popupDisplay: false,
+            popupID: null,
             search: "",
-            expanded: []
         }
+    },
+    components: {
+        StudentPopup
     },
     methods: {
         formatDate(date) {
@@ -54,6 +53,14 @@ export default {
             return String(format_date.getUTCDate())
                 + "/" + String(format_date.getUTCMonth() + 1) // getUTCMonth returns 0-based month
                 + "/" + String(format_date.getUTCFullYear())
+        },
+        showPopup(studentID) {
+            let id = studentID.id;
+            this.popupID = id;
+            this.popupDisplay = true;
+        },
+        hidePopup() {
+            this.popupComponent = null;
         }
     }
 }
