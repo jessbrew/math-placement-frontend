@@ -1,26 +1,41 @@
+<!--
+    TODO: Custom group names
+    TODO: Spacing for submit button
+-->
 <template>
 <div id='table'>
   <component :is="popupComponent" v-bind="popupProperties"></component>
   <h1 class="text-center text-h2">Student Results</h1>
-  <v-card>
-    <v-card-title>
-      <v-text-field label="Search" hide-details single-line v-model="search"></v-text-field>
-    </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="overviewData"
-      item-key="id"
-      class="elevation-1"
-      :search="search"
-      @click:row="showPopup">
-      <template v-slot:item.score="{item}">
-        {{item.score.toFixed(2)}}%
-      </template>
-      <template v-slot:item.date="{item}">
-        {{formatDate(item.date)}}
-      </template>
-  </v-data-table>
-  </v-card>
+  <v-form method="post" @submit.prevent="submitForm">
+    <v-card>
+      <v-card-title>
+        <v-text-field label="Search" hide-details single-line v-model="search"></v-text-field>
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="overviewData"
+        item-key="id"
+        class="elevation-1"
+        :search="search"
+        show-group-by
+        @click:row="showPopup">
+        <template v-slot:item.score="{item}">
+          {{item.score.toFixed(2)}}%
+        </template>
+        <template v-slot:item.date="{item}">
+          {{formatDate(item.date)}}
+        </template>
+        <template v-slot:item.sent_to_registrar="{item}">
+          {{item.sent_to_registrar ? '✅' : '❌'}}
+        </template>
+        <template v-slot:item.submit="{item}">
+          <v-simple-checkbox
+            v-model="submitToRegistrar[item.id]"></v-simple-checkbox>
+        </template>
+      </v-data-table>
+    </v-card>
+  <v-btn type="submit">Submit</v-btn>
+  </v-form>
 </div>
 </template>
 
@@ -33,15 +48,18 @@ export default {
         return {
             overviewData,
             headers: [
-                {text: "Last Name",value: "lname"},
-                {text: "First Name",value: "fname"},
+                {text: "Last Name",value: "lname",groupable: false},
+                {text: "First Name",value: "fname", groupable: false},
                 {text: "Date",value: "date"},
-                {text: "Score",value: "score"},
-                {text: "Placement",value: "placement"}
+                {text: "Score",value: "score", groupable: false},
+                {text: "Placement",value: "placement"},
+                {text: "Submitted",value: "sent_to_registrar"},
+                {text: "Submit",value: "submit", groupable: false}
             ],
             search: "",
             popupComponent: null,
-            popupProperties: {'id':null}
+            popupProperties: {'id':null},
+            submitToRegistrar: {}
         }
     },
     components: {
@@ -61,6 +79,11 @@ export default {
         },
         hidePopup() {
             this.popupComponent = null;
+        },
+        submitForm() {
+            if (Object.keys(this.submitToRegistrar).length != 0) {
+                console.log(Object.keys(this.submitToRegistrar));
+            }
         }
     }
 }
