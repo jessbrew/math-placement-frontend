@@ -20,7 +20,7 @@
 				{
 					"id":2,
 					"question":"This is also a question",
-					"given_answer":"This is a wrong answer",
+					"given_answer":"This is an answer",
 					"status":"Correct"
 				}
 			]

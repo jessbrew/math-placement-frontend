@@ -41,7 +41,8 @@
             hide-default-footer
             disable-pagination
             :expanded.sync="expanded"
-            :items-per-page="-1">
+            :items-per-page="-1"
+            id="studentDataTable">
             <template v-slot:expanded-item="{headers,item}">
               <td :colspan="headers.length">
                 <v-data-table
@@ -140,18 +141,9 @@ export default {
         },
         closePopup() {
             this.$parent.popupComponent = null;
-        }
-    },
-    beforeUpdate() {
-        if (document.getElementsByClassName("v-overlay--active")[0]) {
-            document.getElementsByClassName("v-overlay--active")[0].style.position = "sticky";
-        }
+        },
     },
     mounted() {
-        // Overlay background scroll prevention
-        if (document.getElementsByClassName("v-overlay__scrim")[0]) {
-            document.getElementsByClassName("v-overlay__scrim")[0].style.position = "fixed";
-        }
         this.getStudentOverview(this.id);
         this.placement = studentData.placement;
     }
@@ -192,5 +184,9 @@ export default {
     top: 0px;
     width: 100%;
     z-index: 6;
+}
+#studentDataTable {
+    height: 60vh;
+    overflow: auto;
 }
 </style>
