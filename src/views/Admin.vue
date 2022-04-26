@@ -1,7 +1,3 @@
-<!--
-    TODO: Custom group names
-    TODO: Spacing for submit button
--->
 <template>
 <div id='table'>
   <component :is="popupComponent" v-bind="popupProperties"></component>
@@ -17,7 +13,6 @@
         item-key="id"
         class="elevation-1"
         :search="search"
-        show-group-by
         @click:row="showPopup">
         <template v-slot:item.score="{item}">
           {{item.score.toFixed(2)}}%
@@ -32,9 +27,13 @@
           <v-simple-checkbox
             v-model="submitToRegistrar[item.id]"></v-simple-checkbox>
         </template>
+        <template v-slot:footer>
+          <div class="text-center">
+            <v-btn type="submit">Submit</v-btn>
+          </div>
+        </template>
       </v-data-table>
     </v-card>
-  <v-btn type="submit">Submit</v-btn>
   </v-form>
 </div>
 </template>
@@ -48,13 +47,13 @@ export default {
         return {
             overviewData,
             headers: [
-                {text: "Last Name",value: "lname",groupable: false},
-                {text: "First Name",value: "fname", groupable: false},
+                {text: "Last Name",value: "lname"},
+                {text: "First Name",value: "fname"},
                 {text: "Date",value: "date"},
-                {text: "Score",value: "score", groupable: false},
+                {text: "Score",value: "score"},
                 {text: "Placement",value: "placement"},
                 {text: "Submitted",value: "sent_to_registrar"},
-                {text: "Submit",value: "submit", groupable: false}
+                {text: "Submit",value: "submit"}
             ],
             search: "",
             popupComponent: null,
