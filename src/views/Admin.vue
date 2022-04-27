@@ -13,6 +13,8 @@
         item-key="id"
         class="elevation-1"
         :search="search"
+        :items-per-page="20"
+        :footer-props="{itemsPerPageOptions:[5,10,20,40,50,-1]}"
         @click:row="showPopup">
         <template v-slot:item.score="{item}">
           {{item.score.toFixed(2)}}%
