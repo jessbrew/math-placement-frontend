@@ -1,6 +1,12 @@
 <!--
-    TODO: Grouping for categories
-    TODO: Table scrolling
+    TODO: Fix SVG in question text
+    TODO: Change default number of entries in admin view
+    TODO: Move submit button to bottom right
+    TODO: Rename submit button to "Send to registrar"
+    TODO: Increase font size
+    TODO: Confirm before submit to registrar
+    TODO: Center submit button
+    TODO: Interim screen before editing test data (after other stuff is done)
 -->
 <template>
 <v-overlay opacity="0.9">
@@ -28,7 +34,7 @@
         <v-card-title>
           <div id="title">
             <strong>{{studentData.lname}}, {{studentData.fname}}</strong>
-            <p>Total correct: {{studentData.total_correct}}</p>
+            <p>Total correct: {{studentData.total_correct}}/{{studentData.total_questions}} ({{(studentData.total_correct/studentData.total_questions*100).toFixed(2)}}%)</p>
           </div>
         </v-card-title>
         <v-card-text>
@@ -51,8 +57,14 @@
                   :items="item.questions"
                   hide-default-footer
                   :items-per-page="-1">
+                  <template v-slot:item.question="{item}">
+                    {{item.question}}
+                  </template>
                 </v-data-table>
               </td>
+            </template>
+            <template v-slot:item.score="{item}">
+              {{formatScore(item)}}
             </template>
           </v-data-table>
         </v-card-text>
@@ -116,7 +128,8 @@ export default {
                 {text:"Category",value:"category"},
                 {text:"Correct",value:"correct"},
                 {text:"Unanswered",value:"unanswered"},
-                {text:"Total",value:"total"}
+                {text:"Total",value:"total"},
+                {text:"Score",value:"score"}
             ],
         }
     },
@@ -142,6 +155,14 @@ export default {
         closePopup() {
             this.$parent.popupComponent = null;
         },
+        formatScore(item) {
+            if (item.category != "Total Unanswered") {
+                return String((item.correct / item.total * 100).toFixed(2)) + "%";
+            }
+            else {
+                return String((item.total / this.studentData.total_answered * 100).toFixed(2)) + "%";
+            }
+        }
     },
     mounted() {
         this.getStudentOverview(this.id);
