@@ -29,13 +29,11 @@
           <v-simple-checkbox
             v-model="submitToRegistrar[item.id]"></v-simple-checkbox>
         </template>
-        <template v-slot:footer>
-          <div class="text-center">
-            <v-btn type="submit">Submit</v-btn>
-          </div>
-        </template>
       </v-data-table>
     </v-card>
+    <div class="text-right padding-top">
+      <v-btn type="submit">Submit to Registrar</v-btn>
+    </div>
   </v-form>
 </div>
 </template>
@@ -95,5 +93,8 @@ export default {
     width: 80vw;
     margin-left: auto;
     margin-right: auto;
+}
+.padding-top {
+    padding-top: 10px;
 }
 </style>
