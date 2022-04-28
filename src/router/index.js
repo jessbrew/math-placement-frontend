@@ -39,9 +39,9 @@ const routes = [
         component: () => import('@/views/Completed.vue')
     },
     {
-        path: '/login_admin',
+        path: '/login-admin',
         name: 'Administrator Login',
-        component: () => import('@/views/Login_Admin.vue')
+        component: () => import('@/views/LoginAdmin.vue')
     },
     {
         path: '/admin',

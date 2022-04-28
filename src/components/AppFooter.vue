@@ -1,6 +1,6 @@
 <template>
   <span id="footer">
-    <a href="/#/Admin">Administrator Tools</a>
+    <a v-on:click="$router.push('admin')">Administrator Tools</a>
   </span>
 </template>
 
