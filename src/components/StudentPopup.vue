@@ -1,11 +1,7 @@
 <!--
     TODO: Fix SVG in question text
-    TODO: Change default number of entries in admin view
-    TODO: Move submit button to bottom right
-    TODO: Rename submit button to "Send to registrar"
     TODO: Increase font size
     TODO: Confirm before submit to registrar
-    TODO: Center submit button
     TODO: Interim screen before editing test data (after other stuff is done)
 -->
 <template>
@@ -91,12 +87,14 @@
           <v-card-actions>
             <v-tooltip bottom>
               <template v-slot:activator="{on}">
-                <v-btn
-                  small
-                  v-on="on"
-                  type="Submit">
-                  Submit
-                </v-btn>
+                <div id="submit">
+                  <v-btn
+                    small
+                    v-on="on"
+                    type="Submit">
+                    Submit
+                  </v-btn>
+                </div>
               </template>
               <span>Submit</span>
             </v-tooltip>
@@ -209,5 +207,10 @@ export default {
 #studentDataTable {
     height: 60vh;
     overflow: auto;
+}
+#submit {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 </style>

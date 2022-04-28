@@ -88,7 +88,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 #table {
     width: 80vw;
     margin-left: auto;
@@ -96,5 +96,8 @@ export default {
 }
 .padding-top {
     padding-top: 10px;
+}
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+    font-size: 1rem;
 }
 </style>
