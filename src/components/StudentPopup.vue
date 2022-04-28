@@ -1,6 +1,4 @@
 <!--
-    TODO: Fix SVG in question text
-    TODO: Increase font size
     TODO: Confirm before submit to registrar
     TODO: Interim screen before editing test data (after other stuff is done)
 -->
@@ -54,7 +52,8 @@
                   hide-default-footer
                   :items-per-page="-1">
                   <template v-slot:item.question="{item}">
-                    {{item.question}}
+                    <div v-html="item.question">
+                    </div>
                   </template>
                 </v-data-table>
               </td>
