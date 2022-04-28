@@ -1,5 +1,4 @@
 <!--
-    TODO: Confirm before submit to registrar
     TODO: Interim screen before editing test data (after other stuff is done)
 -->
 <template>

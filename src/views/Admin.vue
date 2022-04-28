@@ -80,8 +80,13 @@ export default {
             this.popupComponent = null;
         },
         submitForm() {
+
             if (Object.keys(this.submitToRegistrar).length != 0) {
-                console.log(Object.keys(this.submitToRegistrar));
+                if (confirm("Are you sure you want to submit these students to the registrar?") == true) {
+                    console.log(Object.keys(this.submitToRegistrar));
+                    this.submitToRegistrar = {};
+                    // reload student data
+                }
             }
         }
     }
