@@ -36,6 +36,6 @@ export default {
 }
 #Admin-Selector .text-h4:hover {
     background-color: base.$emphasis-color;
-    color: base.$alternate-background-color;
+    color: base.$background-color;
 }
 </style>

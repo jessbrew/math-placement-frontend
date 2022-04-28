@@ -1,6 +1,3 @@
-<!--
-    TODO: Interim screen before editing test data (after other stuff is done)
--->
 <template>
 <v-overlay opacity="0.9">
   <div id="header">
