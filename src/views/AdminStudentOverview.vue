@@ -71,8 +71,8 @@ export default {
                 + "/" + String(format_date.getUTCMonth() + 1) // getUTCMonth returns 0-based month
                 + "/" + String(format_date.getUTCFullYear())
         },
-        showPopup(studentID) {
-            let id = studentID.id;
+        showPopup(student) {
+            let id = student.id;
             this.popupProperties.id = id;
             this.popupComponent = "StudentPopup";
         },
