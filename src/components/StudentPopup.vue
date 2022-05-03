@@ -146,7 +146,9 @@ export default {
             }
         },
         closePopup() {
-            this.$parent.popupComponent = null;
+            if (!this.updatedInformation.placement || confirm("Are you sure wish to close this popup?\nAny unsubmitted changes will not be saved.")) {
+                this.$parent.hidePopup();
+            }
         },
         formatScore(item) {
             if (item.category != "Total Unanswered") {
