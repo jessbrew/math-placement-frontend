@@ -5,7 +5,7 @@
     Test Scores
   </button>
   <br/>
-  <button class="text-center text-h4">
+  <button class="text-center text-h4" v-on:click="$router.push('Questions')">
     Edit Questions
   </button>
 </div>
