@@ -18,7 +18,7 @@
       </v-tooltip>
     </v-app-bar>
   </div>
-  <div id="content" v-click-outside="closePopup">
+  <div id="content">
     <div id="data_table">
       <v-card light>
         <v-card-title>
