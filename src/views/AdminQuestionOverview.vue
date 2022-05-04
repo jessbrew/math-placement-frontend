@@ -2,7 +2,7 @@
 <div id="questions">
   <component :is="popupComponent" v-bind="popupProperties"></component>
   <v-card>
-    <v-card-title><h1 class="text-center text-h1">Questions</h1></v-card-title>
+    <v-card-title><h1 class="text-center text-h2">Questions</h1></v-card-title>
     <v-card-text>
       <v-data-table
         :headers="headers"
