@@ -1,0 +1,28 @@
+{
+	"id":1,
+	"text":"This is a question: \\( x = 2^y \\)",
+	"category":"Arithmetic",
+	"answers": [
+		{
+			"id":1,
+			"text":"This is an answer",
+			"correct":false
+		},
+		{
+			"id":2,
+			"text":"This is another answer",
+			"correct":false
+		},
+		{
+			"id":3,
+			"text":"In the beginning was the Word, and the Word was with God, and the Word was God.",
+			"correct":true
+		},
+		{
+			"id":4,
+			"text":"There is no question.",
+			"correct":false
+		}
+	],
+	"tests": ["Test 1","Test 2","Test 3"]
+}
