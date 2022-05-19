@@ -54,6 +54,59 @@
                 <th>Answers</th>
                 <td v-html="QuestionData.answers.length"></td>
               </tr>
+              
+              <!-- Display answer edit buttons -->
+              <!-- NOTE: This is still not working. See note later in code -->
+              <tr>
+                <th>Edit Answers</th>
+                <!-- <template> -->
+                  <!--   <div v-for="index in numAnswers" :key="index"> -->
+                    <!--     <v-dialog :v-model="answersDialogue[index].popup" persistent width="62vw"> -->
+                      <!--       <template v-slot:activator="{on,attrs}"> -->
+                        <!--         <v-btn -->
+                        <!--           small -->
+                        <!--           v-bind="attrs" -->
+                        <!--           color="primary" -->
+                        <!--           v-on="on"> -->
+                          <!--           Answer {{index + 1}} -->
+                          <!--         </v-btn> -->
+                        <!--       </template> -->
+                      <!--       <template v-slot:default> -->
+                        <!--       <v-card> -->
+                          <!--         <v-card-title>Answer {{index + 1}}</v-card-title> -->
+                          <!--         <v-card-text> -->
+                            <!--           Hello world -->
+                            <!--         </v-card-text> -->
+                          <!--         <v-divider /> -->
+                          <!--         <v-card-actions> -->
+                            <!--           <v-btn color="primary" @click="closeAnswer(index)">Close</v-btn> -->
+                            <!--         </v-card-actions> -->
+                          <!--       </v-card> -->
+                        <!--       </template> -->
+                      <!--     </v-dialog> -->
+                    <!--   </div> -->
+                  <!-- </template> -->
+                <td>
+                  <div v-if="answersDialogue.length > 1">
+                    <!-- NOTE: Clicking the button, then editing the question text or category causes the popup to open -->
+                    <v-btn color="primary" dense @click.stop="openAnswer(0)">Question 1</v-btn>
+                    <v-dialog v-model="answersDialogue[0].popup" width="62vw" persistent>
+                        <v-card>
+                          <v-card-title>Answer 1</v-card-title>
+                          <v-card-text>
+                            {{answersDialogue[0].text}} {{answersDialogue[0].popup}}
+                          </v-card-text>
+                          <v-divider />
+                        <v-card-actions>
+                          <v-btn color="primary" @click="answersDialogue[0].popup = false">Close</v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+                  </div>
+                </td>
+              </tr>
+
+              
             </tbody>
           </template>
         </v-simple-table>
@@ -78,7 +131,8 @@ export default {
             questionInput: "",
             categories: ["Arithmetic","Factoring","Equations","Simplification","Exponentiation","Functions","Trigonometry","Limits","Derivatives","Integration","Coordinates","Partial Derivatives","Series","Multiple Integration","Depth"],
             category: "",
-            answerDialogue: QuestionData.answers
+            answersDialogue: QuestionData.answers,
+            numAnswers: QuestionData.answers.length
         }
     },
     methods: {
@@ -96,7 +150,6 @@ export default {
             return null;
         },
         closePopup() {
-            console.log("This function ran");
             if (this.getModifiedData() === null || confirm("Are you sure wish to close this popup?\nAny unsubmitted changes will not be saved.")) {
                 this.$parent.hidePopup()
             }
@@ -108,6 +161,9 @@ export default {
         },
         format() {
             MathJax.typeset() // eslint-disable-line
+        },
+        closeAnswer(index) {
+            this.answersDialogue[index] = false;
         },
         submit() {
             let modifiedData = this.getModifiedData();
@@ -121,14 +177,17 @@ export default {
         reset() {
             this.questionInput = QuestionData.text;
             this.category = this.QuestionData.category;
+        },
+        openAnswer(answerNumber) {
+            this.answersDialogue[answerNumber].popup = true;
         }
     },
     mounted() {
         this.getQuestionOverview(this.id);
         this.questionInput = QuestionData.text;
         this.category = this.QuestionData.category;
-        for (let x = 0; x < this.answerDialogue.length; x++) {
-            this.answerDialogue[x].popup = false;
+        for (let x = 0; x < this.answersDialogue.length; x++) {
+            this.answersDialogue[x].popup = false;
         }
     }
 }
